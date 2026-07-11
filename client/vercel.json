@@ -1,6 +1,22 @@
 {
     "rewrites": [
         {
+            "source": "/auth/(.*)",
+            "destination": "https://webpath-phi.vercel.app/auth/$1"
+        },
+        {
+            "source": "/sites/(.*)",
+            "destination": "https://webpath-phi.vercel.app/sites/$1"
+        },
+        {
+            "source": "/stores/(.*)",
+            "destination": "https://webpath-phi.vercel.app/stores/$1"
+        },
+        {
+            "source": "/public/(.*)",
+            "destination": "https://webpath-phi.vercel.app/public/$1"
+        },
+        {
             "source": "/(.*)",
             "destination": "/index.html"
         }
