@@ -27,7 +27,7 @@ export class AuthController {
     private readonly authService: AuthService,
     private readonly usersService: UsersService,
     private readonly config: ConfigService,
-  ) {}
+  ) { }
 
   private getCookieOptions() {
     const isProd = this.config.get<string>('NODE_ENV') === 'production';
