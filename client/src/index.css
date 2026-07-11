@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Brand palette ── */
+:root {
+  --palette-bright-grey: #ebedf1;
+  --palette-shy-blunt: #d4d8df;
+  --palette-timber-wolf: #acadb1;
+  --palette-smoked-pearl: #706f70;
+  --palette-jet-black: #353536;
+  --palette-reversed-grey: #080808;
+
+  /* App tokens (light) */
+  --e-bg: var(--palette-bright-grey);
+  --e-surface: #ffffff;
+  --e-surface-2: rgba(255, 255, 255, 0.72);
+  --e-border: var(--palette-shy-blunt);
+  --e-text: var(--palette-reversed-grey);
+  --e-text-muted: var(--palette-smoked-pearl);
+  --e-text-subtle: var(--palette-timber-wolf);
+  --e-hover: rgba(212, 216, 223, 0.55);
+  --e-active: var(--palette-shy-blunt);
+  --e-accent: #146ef5;
+  --e-accent-hover: #1258c7;
+
+  --webpath-bg-gradient:
+    radial-gradient(ellipse 100% 80% at 0% 0%, rgba(212, 216, 223, 0.85) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(172, 173, 177, 0.22) 0%, transparent 45%),
+    radial-gradient(ellipse 90% 70% at 50% 100%, rgba(212, 216, 223, 0.65) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 45% at 68% 38%, rgba(235, 237, 241, 0.95) 0%, transparent 50%),
+    radial-gradient(ellipse 35% 30% at 22% 72%, rgba(212, 216, 223, 0.5) 0%, transparent 60%),
+    linear-gradient(145deg, #ebedf1 0%, #d4d8df 32%, #ebedf1 55%, #d4d8df 78%, #ebedf1 100%);
+}
+
+.dark {
+  --e-bg: var(--palette-reversed-grey);
+  --e-surface: var(--palette-jet-black);
+  --e-surface-2: #2a2a2b;
+  --e-border: #454546;
+  --e-text: var(--palette-bright-grey);
+  --e-text-muted: var(--palette-timber-wolf);
+  --e-text-subtle: var(--palette-smoked-pearl);
+  --e-hover: rgba(112, 111, 112, 0.35);
+  --e-active: var(--palette-smoked-pearl);
+  --e-accent: #146ef5;
+  --e-accent-hover: #1258c7;
+
+  --webpath-bg-gradient:
+    radial-gradient(ellipse 80% 50% at 12% -5%, rgba(112, 111, 112, 0.35) 0%, transparent 50%),
+    radial-gradient(ellipse 65% 45% at 88% 8%, rgba(53, 53, 54, 0.9) 0%, transparent 45%),
+    radial-gradient(ellipse 90% 60% at 50% 105%, rgba(112, 111, 112, 0.2) 0%, transparent 55%),
+    linear-gradient(165deg, #080808 0%, #353536 42%, #080808 78%, #353536 100%);
+}
+
+@layer utilities {
+  .webpath-app-bg {
+    background-color: var(--e-bg);
+    background-image: var(--webpath-bg-gradient);
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  .webpath-surface-glass {
+    background: var(--e-surface-2);
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  }
+
+  .webpath-surface-card {
+    background: var(--e-surface);
+    border-color: var(--e-border);
+  }
+
+  .webpath-empty-state {
+    border: 1px dashed var(--e-border);
+    background: var(--e-surface-2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  color: var(--e-text);
+  @apply webpath-app-bg;
+}
