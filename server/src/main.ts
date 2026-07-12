@@ -6,18 +6,30 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const clientUrl = process.env.CLIENT_URL ?? 'http://localhost:5173';
+  const allowedOrigins = [
+    clientUrl,
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+  ];
 
-  app.use(cookieParser());
-
-  // CORS for production / direct API access (dev should use Vite proxy)
+  // CORS must be set up before any other middleware
   app.enableCors({
-    origin: [clientUrl, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: (origin, callback) => {
+      // Allow requests with no origin (mobile apps, curl, etc.)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`Origin ${origin} not allowed by CORS`));
+      }
+    },
     credentials: true,
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Cookie'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type,Authorization,Accept,Cookie',
     preflightContinue: false,
     optionsSuccessStatus: 204,
   });
+
+  app.use(cookieParser());
 
   app.useGlobalPipes(
     new ValidationPipe({
