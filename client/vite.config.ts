@@ -7,10 +7,10 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      '/auth': 'http://localhost:3000',
-      '/stores': 'http://localhost:3000',
-      '/sites': 'http://localhost:3000',
-      '/public': 'http://localhost:3000',
+      '/auth': { target: 'http://localhost:3000', changeOrigin: true },
+      '/stores': { target: 'http://localhost:3000', changeOrigin: true },
+      '/sites': { target: 'http://localhost:3000', changeOrigin: true },
+      '/public': { target: 'http://localhost:3000', changeOrigin: true },
     },
   },
 })
