@@ -223,7 +223,7 @@ export class ProductsService implements OnModuleInit {
 
   toPublicDto(doc: ProductDocument, siteSlug: string) {
     const row = doc as ProductDocument & { createdAt?: Date; updatedAt?: Date };
-    const hasStoredImage = Boolean(doc.imageData?.length);
+    const hasStoredImage = Boolean(doc.imageMimeType);
     return {
       id: doc._id.toString(),
       siteId: doc.siteId.toString(),
@@ -239,7 +239,7 @@ export class ProductsService implements OnModuleInit {
 
   private toDto(doc: ProductDocument) {
     const row = doc as ProductDocument & { createdAt?: Date; updatedAt?: Date };
-    const hasStoredImage = Boolean(doc.imageData?.length);
+    const hasStoredImage = Boolean(doc.imageMimeType);
     return {
       id: doc._id.toString(),
       siteId: doc.siteId.toString(),
